@@ -24,26 +24,49 @@ namespace Laba2___VvSII
         void setDefault()
         {
             //Значения по умолчанию
-            x0_маленький.Text = 0.2.ToString();
-            xd_маленький.Text = 1.0.ToString();
+            //x0_маленький.Text = 0.2.ToString();
+            //xd_маленький.Text = 1.0.ToString();
 
-            x0_низкий.Text = 1.4.ToString();
+            //x0_низкий.Text = 1.4.ToString();
+            //xd_низкий.Text = 0.4.ToString();
+
+            //x0_средний.Text = 1.6.ToString();
+            //xd_средний.Text = 0.4.ToString();
+
+            //x0_высокий.Text = 2.0.ToString();
+            //xd_высокий.Text = 0.6.ToString();
+
+            //x0_легкий.Text = 2.0.ToString();
+            //xd_легкий.Text = 50.0.ToString();
+
+            //x0_нормальный.Text = 65.0.ToString();
+            //xd_нормальный.Text = 25.0.ToString();
+
+            //x0_тяжелый.Text = 150.0.ToString();
+            //xd_тяжелый.Text = 70.0.ToString();
+
+            //textBox1.Text = 1.3.ToString();
+
+            x0_маленький.Text = 0.2.ToString();
+            xd_маленький.Text = 0.8.ToString();
+
+            x0_низкий.Text = 1.2.ToString();
             xd_низкий.Text = 0.4.ToString();
 
             x0_средний.Text = 1.6.ToString();
             xd_средний.Text = 0.4.ToString();
 
             x0_высокий.Text = 2.0.ToString();
-            xd_высокий.Text = 0.6.ToString();
-            
+            xd_высокий.Text = 0.2.ToString();
+
             x0_легкий.Text = 2.0.ToString();
-            xd_легкий.Text = 50.0.ToString();
+            xd_легкий.Text = 35.0.ToString();
 
-            x0_нормальный.Text = 65.0.ToString();
-            xd_нормальный.Text = 25.0.ToString();
+            x0_нормальный.Text = 60.0.ToString();
+            xd_нормальный.Text = 30.0.ToString();
 
-            x0_тяжелый.Text = 150.0.ToString();
-            xd_тяжелый.Text = 70.0.ToString();
+            x0_тяжелый.Text = 120.0.ToString();
+            xd_тяжелый.Text = 40.0.ToString();
 
             textBox1.Text = 1.3.ToString();
 
@@ -246,6 +269,8 @@ namespace Laba2___VvSII
 
         }
 
+        private double Round(double input) => Math.Round(input, 3);
+
 
         private void button3_Click(object sender, EventArgs e)
         {
@@ -255,7 +280,7 @@ namespace Laba2___VvSII
             label_res_0.Text = "Л ≤ ";
             label_res_1.Text = "Н ≤ ";
             label_res_2.Text = "Т ≤ ";
-            result.Text = "Условия соблюдаются в диапазоне:\n";
+            result.Text = "Диапазон соблюдения условий:\n";
 
             double[] max = new double[3];
             double value;
@@ -265,11 +290,11 @@ namespace Laba2___VvSII
 
                 for (int j = 0; j < nBox[i]; j++)
                 {
-                    value = Рост_x[((ComboBox)panel_If.Controls["cBox" + i + j]).SelectedIndex];
+                    value = Round(Рост_x[((ComboBox)panel_If.Controls["cBox" + i + j]).SelectedIndex]);
 
                     if (j == 0)
-                        panel_result.Controls["label_" + i].Text += "max{ ";
-                    panel_result.Controls["label_" + i].Text += (" " + value.ToString() + ";");
+                        panel_result.Controls["label_" + i].Text += "max{";
+                    panel_result.Controls["label_" + i].Text += ("" + value.ToString() + ";");
                     if (j == nBox[i] - 1)
                         panel_result.Controls["label_" + i].Text += "}";
 
@@ -331,7 +356,7 @@ namespace Laba2___VvSII
                     }
                     interval_1[0] = x;
                     interval_1[1] = 150;
-                    panel_result.Controls["label_res_" + i].Text += (" при [" + x + "; " + "150]");
+                    panel_result.Controls["label_res_" + i].Text += (" при [" + Round(x) + "; " + "150]");
                            
                 }
                 else if (i == 1)
@@ -345,7 +370,7 @@ namespace Laba2___VvSII
 
                     interval_2[0] = 2;
                     interval_2[1] = x;
-                    panel_result.Controls["label_res_" + i].Text += (" при [2; " + x + "]");
+                    panel_result.Controls["label_res_" + i].Text += (" при [2; " + Round(x) + "]");
 
                     y = pi(x, a, b, d);
                     while (y > max[i])
@@ -356,7 +381,7 @@ namespace Laba2___VvSII
 
                     interval_2[2] = x;
                     interval_2[3] = 150;
-                    panel_result.Controls["label_res_" + i].Text += (" V [" + x + "; " + "150]");
+                    panel_result.Controls["label_res_" + i].Text += (" V [" + Round(x) + "; " + "150]");
 
                 }
                 else 
@@ -371,10 +396,6 @@ namespace Laba2___VvSII
                      interval_3[0] = 2;
                     interval_3[1] = x;
                     panel_result.Controls["label_res_" + i].Text += (" при [2; " + string.Format("{0:0.##}", x) + "]");
-
-                        
-                        
-                    
                 }
             }
         
@@ -408,134 +429,9 @@ namespace Laba2___VvSII
                     result_interval = new double[] { 0,0 };
             }
 
-                result.Text += "[" + result_interval[0] + "; " + result_interval[1] + "]";
+                result.Text += "[" + Round(result_interval[0]) + "; " + Round(result_interval[1]) + "]";
             if (result_interval.Length >2)
-                result.Text += " V [" + result_interval[2] + "; " + string.Format("{0:0.##}", result_interval[3]) + "]";
-
-        }
-
-        private void button2_Click(object sender, EventArgs e)
-        {
-            среднее_значение = 0;
-            double[] max = new double[3];
-            double value;
-            for (int i = 0; i < 3; i++)
-            {
-                max[i] = 0;
-                for (int j = 0; j < nBox[i]; j++)
-                {
-                    value = Рост_x[((ComboBox)panel_If.Controls["cBox" + i + j]).SelectedIndex];
-
-                    if (max[i] < value)
-                        max[i] = value;
-                }
-            }
-
-            double[] Л = { to_d(x0_легкий), to_d(x0_легкий) + to_d(x0_легкий) / 2, to_d(x0_легкий) + to_d(xd_легкий) };
-            double[] Н = { to_d(x0_нормальный) - to_d(xd_нормальный), to_d(x0_нормальный) - to_d(xd_нормальный) / 2, to_d(x0_нормальный), to_d(x0_нормальный) + to_d(x0_нормальный) / 2, to_d(x0_нормальный) + to_d(xd_нормальный) };
-            double[] Т = { to_d(x0_тяжелый) - to_d(xd_тяжелый), to_d(x0_тяжелый) + to_d(x0_тяжелый) / 2, to_d(x0_тяжелый) };
-
-            double[] м_Л = { 1, 0.5, 0 };
-            double[] м_Н = { 0, 0.5, 1, 0.5, 0 };
-            double[] м_Т = { 1, 0.5, 0 };
-
-            double znam = 0;
-            if (max[0] > 0)
-                for (int i = 0; i < 3; i++)
-                {
-                    if ((1 - max[0]) > м_Л[i])
-                    {
-                        среднее_значение += (1 - max[0]) * Л[i];
-                        znam += (1 - max[0]);
-                    }
-                    else
-                    {
-                        среднее_значение += м_Л[i] * Л[i];
-                        znam += м_Л[i];
-                    }
-                }
-            if (max[1] > 0)
-                for (int i = 0; i < 5; i++)
-                {
-                    if ((1 - max[0]) > м_Н[i])
-                    {
-                        среднее_значение += (1 - max[0]) * Н[i];
-                        znam += (1 - max[0]);
-                    }
-                    else
-                    {
-                        среднее_значение += м_Н[i] * Н[i];
-                        znam += м_Н[i];
-                    }
-                }
-            if (max[2] > 0)
-                for (int i = 0; i < 3; i++)
-                {
-                    if ((1 - max[0]) > м_Т[i])
-                    {
-                        среднее_значение += (1 - max[0]) * Т[i];
-                        znam += (1 - max[0]);
-                    }
-                    else
-                    {
-                        среднее_значение += м_Т[i] * Т[i];
-                        znam += м_Т[i];
-                    }
-                }
-
-            среднее_значение /= znam;
-
-            построить_функцию_около(среднее_значение);
-
-
-        }
-
-        double to_d(TextBox text)
-        {
-            return Convert.ToDouble(text.Text);
-        }
-
-        private void построить_функцию_около(double около_Вес)
-        {
-
-
-            double u_ = около_Вес;
-            double lyambda;
-            double et;
-            if ((u_ >= to_d(x0_легкий)) && (u_ <= to_d(x0_нормальный)))
-            {
-                lyambda = (to_d(x0_нормальный) - u_) / (to_d(x0_нормальный) - to_d(x0_легкий));
-
-                et = lyambda * to_d(xd_нормальный) + (1 - lyambda) * to_d(xd_легкий);
-            }
-            else
-            {
-                lyambda = (to_d(x0_тяжелый) - u_) / (to_d(x0_тяжелый) - to_d(x0_нормальный));
-                et = lyambda * to_d(xd_тяжелый) + (1 - lyambda) * to_d(xd_нормальный);
-            }
-            et -= 20;
-
-            int N = 100;
-            chart3.Series.Clear();
-            //-----------график----------
-            chart3.Series.Add("Вес");
-            chart3.Series[0].ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Area;
-            double x = 2;
-            double y;
-            double step = (150 - 2) / N;
-            for (int i = 0; i < N; i++)
-            {
-                y = pi(i, u_ - et, u_, u_ + et);
-
-                chart3.Series[0].Points.AddXY(x, y);
-                x += step;
-            }
-            labelXD1.Text = "Диапазон возможного веса [";
-            if ((u_ - et) > 2)
-                labelXD1.Text += (u_ - et) + "; " + (u_ + et) + "]";
-            else
-                labelXD1.Text += "2; " + (u_ + et) + "]";
-            label13.Text = "Оптимальный вес ~ " + u_;
+                result.Text += " V [" + Round(result_interval[2]) + "; " + string.Format("{0:0.##}", Round(result_interval[3])) + "]";
 
         }
     }
